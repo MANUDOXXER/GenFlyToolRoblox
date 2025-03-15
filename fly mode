@@ -1,0 +1,27 @@
+-- This Lua script makes a character fly in Roblox
+ 
+-- Get the player's character
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+ 
+-- Check if the character has a humanoid
+local humanoid = character:FindFirstChild("Humanoid")
+if not humanoid then
+    error("Character does not have a Humanoid.")
+end
+ 
+-- Enable flying for the character
+humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, true)
+humanoid.PlatformStand = true
+ 
+-- Set the character's velocity to make it fly
+humanoid.PlatformStand = false
+humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+ 
+-- Monitor the character's position and velocity
+while humanoid:GetState() == Enum.HumanoidStateType.Flying do
+    print("Character is flying.")
+    print("Position:", character.PrimaryPart.Position)
+    print("Velocity:", character.PrimaryPart.Velocity)
+    wait(1)
+end
